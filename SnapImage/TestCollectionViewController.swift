@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class TestCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
     
     
@@ -23,9 +21,9 @@ class TestCollectionViewController: UICollectionViewController, UIGestureRecogni
     
     var dragStartPositionRelativeToCenter: CGPoint?
     
-    var moveImageViewPanGestureRecognizer: UIPanGestureRecognizer!
-    
     var cards: [Card] = []
+    
+    var tappedCell: ImageCollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,18 +34,11 @@ class TestCollectionViewController: UICollectionViewController, UIGestureRecogni
         
         self.view.addSubview(darkBackgroundView)
         
-        moveImageViewPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
-        
-        
-        moveImageViewPanGestureRecognizer.delegate = self
-        
-        self.view.addGestureRecognizer(moveImageViewPanGestureRecognizer)
-        
         CardController.draw(numberOfCards: 52) { (cards) in
             
             let group = DispatchGroup()
             
-    self.cards = cards
+            self.cards = cards
             
             for card in self.cards {
                 group.enter()
@@ -58,57 +49,20 @@ class TestCollectionViewController: UICollectionViewController, UIGestureRecogni
                 })
             }
             
-            group.notify(queue: DispatchQueue.main, execute: { 
+            group.notify(queue: DispatchQueue.main, execute: {
                 self.collectionView?.reloadData()
             })
         }
         
     }
     
-    func handlePan(sender: UIPanGestureRecognizer) {
-        guard isFullScreen else { return }
-        //        switch sender.state {
-        //
-        //
-        //        case .began:
-        //            let locationInView = sender.location(in: self.view)
-        //            dragStartPositionRelativeToCenter = CGPoint(x: locationInView.x - imageView.center.x, y: locationInView.y - imageView.center.y)
-        //
-        //            return
-        //
-        //
-        //        case .ended:
-        //
-        //            print(sender.velocity(in: self.view).y)
-        //            dragStartPositionRelativeToCenter = nil
-        //
-        //            if sender.velocity(in: self.view).x > 900 || sender.velocity(in: self.view).x < -900, sender.velocity(in: self.view).y > 900 || sender.velocity(in: self.view).y < -900 {
-        //                self.expandImageView()
-        //            } else {
-        //                UIView.animate(withDuration: 0.2, animations: {
-        //                    self.imageView.center = self.view.center
-        //                })
-        //            }
-        //        case .changed:
-        //
-        //            let locationInView = sender.location(in: self.view)
-        //
-        //            UIView.animate(withDuration: 0.1) {
-        //                self.imageView.center = CGPoint(x: locationInView.x - self.dragStartPositionRelativeToCenter!.x,
-        //                                                y: locationInView.y - self.dragStartPositionRelativeToCenter!.y)
-        //            }
-        //
-        //        default:
-        //            break
-        //        }
-    }
-    
-    
     func expandImageViewIn(cell: ImageCollectionViewCell) {
         
         guard let imageView = cell.imageView else { return }
         
         if !isFullScreen {
+            
+            self.tappedCell = cell
             
             originalFrame = self.view.convert(imageView.frame, from: imageView.superview)
             originalContentMode = imageView.contentMode
@@ -124,11 +78,14 @@ class TestCollectionViewController: UICollectionViewController, UIGestureRecogni
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
                 self.view.addSubview(expandingImageView)
+                cell.imageView.image = UIImage()
+
                 expandingImageView.frame = self.view.bounds
                 
                 
                 self.darkBackgroundView.alpha = 0.5
             }, completion: { (_) in
+                
                 let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissFullscreenImageView(sender:)))
                 expandingImageView.addGestureRecognizer(tap)
                 
@@ -161,7 +118,11 @@ class TestCollectionViewController: UICollectionViewController, UIGestureRecogni
             
         }, completion: { (_) in
             sender.view?.removeFromSuperview()
+            
             self.isFullScreen = false
+            
+            guard let cell = self.tappedCell else { return }
+            cell.imageView.image = expandingImageView.image
         })
     }
     

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		464D09E61E20007F003039AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D09E51E20007F003039AD /* AppDelegate.swift */; };
-		464D09E81E20007F003039AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D09E71E20007F003039AD /* ViewController.swift */; };
 		464D09EB1E20007F003039AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D09E91E20007F003039AD /* Main.storyboard */; };
 		464D09ED1E20007F003039AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464D09EC1E20007F003039AD /* Assets.xcassets */; };
 		464D09F01E20007F003039AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D09EE1E20007F003039AD /* LaunchScreen.storyboard */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		464D09E21E20007F003039AD /* SnapImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D09E51E20007F003039AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		464D09E71E20007F003039AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		464D09EA1E20007F003039AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		464D09EC1E20007F003039AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		464D09EF1E20007F003039AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4629B6771E730B2A0061C893 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				464D09EE1E20007F003039AD /* LaunchScreen.storyboard */,
+				464D09E91E20007F003039AD /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		464D09D91E20007F003039AD = {
 			isa = PBXGroup;
 			children = (
@@ -67,11 +74,12 @@
 			isa = PBXGroup;
 			children = (
 				46AFC99E1E453CC800F4ADE7 /* Resources */,
-				46AFC99D1E453CBC00F4ADE7 /* View Controllers */,
-				46AFC99B1E453CB000F4ADE7 /* Model Controllers */,
-				46AFC99C1E453CB600F4ADE7 /* Other Controllers */,
 				46AFC99F1E453CD500F4ADE7 /* Models */,
 				46AFC9A01E453CDC00F4ADE7 /* Views */,
+				46AFC99B1E453CB000F4ADE7 /* Model Controllers */,
+				46AFC99D1E453CBC00F4ADE7 /* View Controllers */,
+				46AFC99C1E453CB600F4ADE7 /* Other Controllers */,
+				4629B6771E730B2A0061C893 /* Storyboards */,
 			);
 			path = SnapImage;
 			sourceTree = "<group>";
@@ -97,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				464D09F71E203A2B003039AD /* TestCollectionViewController.swift */,
-				464D09E71E20007F003039AD /* ViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -107,7 +114,6 @@
 			children = (
 				464D09E51E20007F003039AD /* AppDelegate.swift */,
 				464D09EC1E20007F003039AD /* Assets.xcassets */,
-				464D09EE1E20007F003039AD /* LaunchScreen.storyboard */,
 				464D09F11E20007F003039AD /* Info.plist */,
 			);
 			name = Resources;
@@ -124,7 +130,6 @@
 		46AFC9A01E453CDC00F4ADE7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				464D09E91E20007F003039AD /* Main.storyboard */,
 				464D09F91E203A9B003039AD /* ImageCollectionViewCell.swift */,
 			);
 			name = Views;
@@ -205,7 +210,6 @@
 			files = (
 				46EFF9961E23EE490038A93E /* ImageController.swift in Sources */,
 				46EFF9981E23EE530038A93E /* CardController.swift in Sources */,
-				464D09E81E20007F003039AD /* ViewController.swift in Sources */,
 				464D09F81E203A2B003039AD /* TestCollectionViewController.swift in Sources */,
 				464D09FA1E203A9B003039AD /* ImageCollectionViewCell.swift in Sources */,
 				46EFF99A1E23EE6E0038A93E /* NetworkController.swift in Sources */,
